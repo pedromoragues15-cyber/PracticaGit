@@ -79,6 +79,17 @@ public final class Interval {
 
         return new Interval(a, b);
     }
+
+    public Interval expand(double delta) {
+        if (delta < 0) {
+            throw new IllegalArgumentException("delta < 0");
+        }
+
+        return new Interval(
+                this.start - delta,
+                this.end + delta
+        );
+    }
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
