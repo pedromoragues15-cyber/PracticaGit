@@ -24,4 +24,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Git_Practicas"
 include(":app")
- 
+include(":intervals")
