@@ -1,5 +1,7 @@
 package com.example.math;
 
+import java.util.Optional;
+
 public final class Interval {
 
     private final double start, end;
@@ -33,6 +35,27 @@ public final class Interval {
         return !(o.end < this.start || o.start > this.end);
     }
 
+    public Optional<Interval> intersection(Interval o) {
+        double s = Math.max(this.start, o.start);
+        double e = Math.min(this.end, o.end);
+
+        return (s <= e)
+                ? Optional.of(new Interval(s, e))
+                : Optional.empty();
+    }
+
+    public Optional<Interval> union(Interval o) {
+        if (!this.overlaps(o) &&
+                !(this.end == o.start || o.end == this.start)) {
+            return Optional.empty();
+        }
+
+        double s = Math.min(this.start, o.start);
+        double e = Math.max(this.end, o.end);
+
+        return Optional.of(new Interval(s, e));
+    }
+
     @Override
     public String toString() {
         return "[" + start + "," + end + "]";
@@ -53,5 +76,4 @@ public final class Interval {
     public int hashCode() {
         return Double.hashCode(start) * 31 + Double.hashCode(end);
     }
-
 }
