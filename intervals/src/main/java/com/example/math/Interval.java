@@ -37,4 +37,21 @@ public final class Interval {
     public String toString() {
         return "[" + start + "," + end + "]";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Interval o)) return false;
+
+        double eps = 1e-9;
+
+        return Math.abs(start - o.start) < eps
+                && Math.abs(end - o.end) < eps;
+    }
+
+    @Override
+    public int hashCode() {
+        return Double.hashCode(start) * 31 + Double.hashCode(end);
+    }
+
 }
