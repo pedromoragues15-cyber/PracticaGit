@@ -25,6 +25,14 @@ public final class Interval {
         return end - start;
     }
 
+    public boolean contains(double x) {
+        return x >= start && x <= end;
+    }
+
+    public boolean overlaps(Interval o) {
+        return !(o.end < this.start || o.start > this.end);
+    }
+
     @Override
     public String toString() {
         return "[" + start + "," + end + "]";
