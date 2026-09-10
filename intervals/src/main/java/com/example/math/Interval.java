@@ -61,6 +61,24 @@ public final class Interval {
         return "[" + start + "," + end + "]";
     }
 
+    public static Interval parse(String s) {
+        String t = s.trim();
+
+        if (!t.startsWith("[") || !t.endsWith("]"))
+            throw new IllegalArgumentException("Formato: [a,b]");
+
+        t = t.substring(1, t.length() - 1);
+
+        String[] parts = t.split(",");
+
+        if (parts.length != 2)
+            throw new IllegalArgumentException("Formato: [a,b]");
+
+        double a = Double.parseDouble(parts[0].trim());
+        double b = Double.parseDouble(parts[1].trim());
+
+        return new Interval(a, b);
+    }
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
